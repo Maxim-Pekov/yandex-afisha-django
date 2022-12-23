@@ -18,7 +18,7 @@ class Place(models.Model):
 class Image(models.Model):
     img = models.ImageField(
         'Изображение',
-        upload_to='images / %Y-%m-%d/'
+        upload_to='images/%Y-%m-%d/'
     )
     places = models.ManyToManyField(
         Place,
