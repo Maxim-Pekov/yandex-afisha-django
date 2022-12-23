@@ -1,5 +1,8 @@
 from django.db import models
-
+from afisha_project import settings
+from pathlib import Path
+print(f'это путь ---->>> {Path(__file__).resolve().parent}')
+print(settings.MEDIA_ROOT / 'max')
 
 class Place(models.Model):
     title = models.CharField('Название', max_length=200)
@@ -13,7 +16,10 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    img = models.ImageField('Изображение')
+    img = models.ImageField(
+        'Изображение',
+        upload_to='images / %Y-%m-%d/'
+    )
     places = models.ManyToManyField(
         Place,
         related_name='imgs',
