@@ -1,8 +1,16 @@
 from django.shortcuts import render
 from .models import Place
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
 
 
-def show_phones(request):
+def show_place_id(request, place_id):
+    # place_id = request.params
+    place = get_object_or_404(Place, pk=place_id)
+    return HttpResponse(place.title)
+
+
+def show_place(request):
     places = Place.objects.all()
     features = []
     for place in places:
