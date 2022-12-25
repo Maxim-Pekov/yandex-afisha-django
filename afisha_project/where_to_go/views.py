@@ -1,34 +1,25 @@
 from django.shortcuts import render
+from .models import Place
 
 
 def show_phones(request):
-    places = {
-        "type": "FeatureCollection",
-        "features": [
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.62, 55.793676]
-                },
-                "properties": {
-                    "title": "«Легенды Москвы",
-                    "placeId": "moscow_legends",
-                    "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json"
-                }
+    places = Place.objects.all()
+    features = []
+    for place in places:
+        features.append({
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [place.coordinates_lng, place.coordinates_lat]
             },
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.64, 55.753676]
-                },
-                "properties": {
-                    "title": "Крыши24.рф",
-                    "placeId": "roofs24",
-                    "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/roofs24.json"
-                }
+            "properties": {
+                "title": place.title,
+                "placeId": place.id,
+                "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json"
             }
-        ]
+        },)
+    places_geo = {
+        "type": "FeatureCollection",
+        "features": features
     }
-    return render(request, 'where_to_go/index.html', context={'places': places})
+    return render(request, 'where_to_go/index.html', context={'places': places_geo})
