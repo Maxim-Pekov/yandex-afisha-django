@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Place
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, JsonResponse
+from django.urls import reverse
 
 
 def show_place_id(request, place_id):
@@ -33,7 +34,7 @@ def show_place(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json"
+                "detailsUrl": reverse('place_json', args=[place.id])
             }
         },)
     places_geo = {
