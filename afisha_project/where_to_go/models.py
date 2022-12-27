@@ -2,7 +2,7 @@ from django.db import models
 from afisha_project import settings
 from pathlib import Path
 print(f'это путь ---->>> {Path(__file__)}')
-print(settings.MEDIA_ROOT / 'max')
+# print(settings.MEDIA_ROOT / 'max')
 
 class Place(models.Model):
     title = models.CharField('Название', max_length=200)
@@ -14,8 +14,19 @@ class Place(models.Model):
     def __str__(self):
         return f'{self.title} {self.coordinates_lng} {self.coordinates_lat}'
 
+    class Meta:
+        ordering = ['title']
+        verbose_name = 'Метка на карте'
+        verbose_name_plural = 'Метки на карте'
+
 
 class Image(models.Model):
+    position = models.PositiveIntegerField()
+    my_order = models.PositiveIntegerField(
+        default=0,
+        blank=False,
+        null=False,
+    )
     img = models.ImageField(
         'Изображение',
         upload_to='images/%Y-%m-%d/'
@@ -26,6 +37,12 @@ class Image(models.Model):
         verbose_name='Изображения',
         on_delete=models.CASCADE
     )
-    position = models.PositiveIntegerField()
 
+    class Meta:
+        ordering = ['my_order']
+        verbose_name = 'Картинка'
+        verbose_name_plural = 'Картинки'
+
+    def contact_default(self):
+        return
 

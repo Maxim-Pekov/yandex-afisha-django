@@ -9,7 +9,7 @@ def show_place_id(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     place_json = {
         "title": place.title,
-        "imgs": [ image.img.url for image in place.imgs.order_by('position').all()],
+        "imgs": [ image.img.url for image in place.imgs.order_by('my_order').all()],
         "description_short": place.description_short,
         "description_long": place.description_long,
         "coordinates": {
