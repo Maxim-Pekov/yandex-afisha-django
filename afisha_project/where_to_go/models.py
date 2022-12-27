@@ -1,7 +1,7 @@
 from django.db import models
 from afisha_project import settings
 from pathlib import Path
-print(f'это путь ---->>> {Path(__file__).resolve().parent}')
+print(f'это путь ---->>> {Path(__file__)}')
 print(settings.MEDIA_ROOT / 'max')
 
 class Place(models.Model):
@@ -20,10 +20,12 @@ class Image(models.Model):
         'Изображение',
         upload_to='images/%Y-%m-%d/'
     )
-    places = models.ManyToManyField(
+    places = models.ForeignKey(
         Place,
         related_name='imgs',
-        verbose_name='Изображения'
+        verbose_name='Изображения',
+        on_delete=models.CASCADE
     )
+    position = models.PositiveIntegerField()
 
 
