@@ -1,13 +1,12 @@
 from django.db import models
 from afisha_project import settings
-from pathlib import Path
-print(f'это путь ---->>> {Path(__file__)}')
-# print(settings.MEDIA_ROOT / 'max')
+from tinymce.models import HTMLField
+
 
 class Place(models.Model):
     title = models.CharField('Название', max_length=200)
     description_short = models.TextField('Короткое описание')
-    description_long = models.TextField('Длинное описание')
+    description_long = HTMLField('Длинное описание')
     coordinates_lng = models.FloatField('Долгота', blank=True, null=True)
     coordinates_lat = models.FloatField('Широта', blank=True)
 

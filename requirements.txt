@@ -1,3 +1,4 @@
 Django==3.2.*
 Pillow==9.3.0
 django_admin_sortable2==2.1.4
+django_tinymce==3.5.0
