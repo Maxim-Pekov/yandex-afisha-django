@@ -2,16 +2,11 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from .models import Place, Image
 from adminsortable2.admin import SortableAdminMixin
-from adminsortable2.admin import SortableStackedInline
-
-
-class ImageStackedInline(SortableStackedInline):
-    model = Image
 
 
 class ImageInline(admin.TabularInline):
     model = Image
-    fields = ('img', 'get_image', 'position')
+    fields = ('my_order', 'get_image', 'position')
     readonly_fields = ('get_image',)
     extra = 0     #Это определяет количество дополнительных форм, которые набор форм будет отображать в дополнение к исходным формам. По умолчанию 3.
 
