@@ -1,5 +1,4 @@
 from django.db import models
-from afisha_project import settings
 from tinymce.models import HTMLField
 
 
@@ -11,7 +10,10 @@ class Place(models.Model):
     coordinates_lat = models.FloatField('Широта', blank=True)
 
     def __str__(self):
-        return f'{self.title} {self.coordinates_lng} {self.coordinates_lat}'
+        return f'{self.title}'
+
+    def get_short_title(self):
+        return self.title.split('«')[1]
 
     class Meta:
         ordering = ['title']
@@ -20,8 +22,7 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    position = models.PositiveIntegerField()
-    my_order = models.PositiveIntegerField(
+    position = models.PositiveIntegerField(
         default=0,
         blank=False,
         null=False,
@@ -30,18 +31,17 @@ class Image(models.Model):
         'Изображение',
         upload_to='images/%Y-%m-%d/'
     )
-    places = models.ForeignKey(
+    place = models.ForeignKey(
         Place,
         related_name='imgs',
-        verbose_name='Изображения',
+        verbose_name='Место на карте',
         on_delete=models.CASCADE
     )
 
     class Meta:
-        ordering = ['my_order']
+        ordering = ['position']
         verbose_name = 'Картинка'
         verbose_name_plural = 'Картинки'
 
-    def contact_default(self):
-        return
+
 
