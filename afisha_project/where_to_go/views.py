@@ -17,7 +17,6 @@ def show_place_id(request, place_id):
             "lat": place.coordinates_lat
         }
     }
-    print(place_json)
     return JsonResponse(place_json, json_dumps_params={'ensure_ascii': False, 'indent': 2})
 
 
