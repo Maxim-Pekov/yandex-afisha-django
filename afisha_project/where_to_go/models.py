@@ -3,7 +3,7 @@ from tinymce.models import HTMLField
 
 
 class Place(models.Model):
-    title = models.CharField('Название', max_length=200)
+    title = models.CharField('Название', max_length=200, unique=True)
     description_short = models.TextField('Короткое описание')
     description_long = HTMLField('Длинное описание')
     coordinates_lng = models.FloatField('Долгота', blank=True, null=True)
@@ -13,7 +13,10 @@ class Place(models.Model):
         return f'{self.title}'
 
     def get_short_title(self):
-        return self.title.split('«')[1]
+        if '«' in self.title:
+            return self.title.split('«')[1]
+        else:
+            return self.title
 
     class Meta:
         ordering = ['title']
