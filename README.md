@@ -91,6 +91,9 @@ python manage.py load_place --json_url < GITHUB_URL >
 [github.com/devmanorg/places](https://github.com/devmanorg/where-to-go-places/tree/master/places), 
 для этого перейдите по ссылке, выберете любую локацию и нажмите RAW
 
+Вот пример того как должен выклюдить json file с локациями.
+![](./afisha_project/where_to_go/static/where_to_go/images/json_github.png)
+
 9. В браузере перейдите на странницу `http://127.0.0.1:8000`
 
 ## About me
