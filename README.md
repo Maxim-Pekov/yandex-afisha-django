@@ -2,7 +2,7 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=Yandex+afisha+django)](https://git.io/typing-svg)
 
 Это проект-сайт для отметок интересных мест на интерактивной карте с подробным описанием и фотографиями, рабочий сайт
-можете посмотреть здесь[https://tululu.org/](https://tululu.org/).
+можете посмотреть здесь [https://fenixxmax.pythonanywhere.com/](https://fenixxmax.pythonanywhere.com/).
 
 ![](./afisha_project/where_to_go/static/where_to_go/images/index.png)
 
@@ -64,7 +64,7 @@ python3 manage.py createsuperuser
 ```python
 SECRET_KEY='Ваш секретный код'
 DEBUG=True
-ALLOWED_HOSTS="127.0.0.1"
+ALLOWED_HOSTS=127.0.0.1,localhost
 DATABASE_ENGINE='django.db.backends.sqlite3'
 DATABASE_NAME='db.sqlite3'
 ```
@@ -80,7 +80,18 @@ python manage.py migrate
 ```python
 python manage.py runserver
 ```
-8. В браузере перейдите на странницу `http://127.0.0.1:8000`
+
+8. Что бы загрузить данные (такие же как на примере в БД) из json файла, воспользуйтесь командой ниже:
+
+```python
+python manage.py load_place --json_url < GITHUB_URL >
+```
+
+Вместо < GITHUB_URL > подставьте RAW адрес одной из локаций, которые вы найдете здесь 
+[github.com/devmanorg/places](https://github.com/devmanorg/where-to-go-places/tree/master/places), 
+для этого перейдите по ссылке, выберете любую локацию и нажмите RAW
+
+9. В браузере перейдите на странницу `http://127.0.0.1:8000`
 
 ## About me
 
