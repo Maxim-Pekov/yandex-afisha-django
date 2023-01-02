@@ -9,43 +9,37 @@ class Command(BaseCommand):
     help = 'Скачивает данные с GITHUB в базу проекта'
 
     def add_arguments(self, parser):
-        # Named (optional) arguments
         parser.add_argument(
             '--json_url',
             action='store',
             dest='json_url',
             type=str,
-            default=0.0,
-            help='Max value'
+            default='',
+            help='Введите url к json файлу с данными о локациях'
         )
 
-    def write_json_to_bd(self, json):
-        title = json['title']
-        description_short = json['description_short']
-        description_long = json['description_long']
-        coordinates = json['coordinates']
-        coordinates_lng = coordinates['lng']
-        coordinates_lat = coordinates['lat']
-        imgs = json['imgs']
-        place = Place.objects.get_or_create(
-            title=title,
-            description_short=description_short,
-            description_long=description_long,
-            coordinates_lng=coordinates_lng,
-            coordinates_lat=coordinates_lat
-        )
-
-        for count, img_url in enumerate(imgs):
-            file = requests.get(img_url)
-            img_name = os.path.basename(img_url)
-            content = ContentFile(file.content, f'{img_name}')
+    def write_imgs_to_db(self, place, img_urls):
+        for img_url in img_urls:
+            response = requests.get(img_url)
+            img_title = os.path.basename(img_url)
+            content = ContentFile(response.content, img_title)
             Image.objects.get_or_create(
                 place=place[0],
                 img=content
             )
 
+    def write_json_to_bd(self, json):
+        coordinates = json['coordinates']
+        place = Place.objects.get_or_create(
+            title=json.get('title'),
+            description_short=json.get('description_short'),
+            description_long=json.get('description_long'),
+            coordinates_lng=coordinates.get('lng'),
+            coordinates_lat=coordinates.get('lat')
+        )
+        self.write_imgs_to_db(place, json.get('imgs'))
+
     def handle(self, *args, **options):
         json_url = options['json_url']
         response = requests.get(json_url)
-        print(response.json())
         self.write_json_to_bd(response.json())
