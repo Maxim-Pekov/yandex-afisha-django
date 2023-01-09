@@ -45,6 +45,3 @@ class Image(models.Model):
         ordering = ['position']
         verbose_name = 'Картинка'
         verbose_name_plural = 'Картинки'
-
-
-
