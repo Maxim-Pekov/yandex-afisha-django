@@ -9,7 +9,8 @@ def show_place_id(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     place_json = {
         "title": place.title,
-        "imgs": [ image.img.url for image in place.imgs.order_by('position').all()],
+        "imgs": [image.img.url for image in
+                 place.imgs.order_by('position').all()],
         "description_short": place.description_short,
         "description_long": place.description_long,
         "coordinates": {
@@ -17,7 +18,8 @@ def show_place_id(request, place_id):
             "lat": place.coordinates_lat
         }
     }
-    return JsonResponse(place_json, json_dumps_params={'ensure_ascii': False, 'indent': 2})
+    return JsonResponse(place_json,
+                        json_dumps_params={'ensure_ascii': False, 'indent': 2})
 
 
 def show_place(request):
@@ -28,16 +30,17 @@ def show_place(request):
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [place.coordinates_lng, place.coordinates_lat]
+                "coordinates": [place.coordinates_lng, place.coordinates_lat],
             },
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": reverse('place_json', args=[place.id])
+                "detailsUrl": reverse('place_json', args=[place.id]),
             }
         },)
     places_geo = {
         "type": "FeatureCollection",
         "features": features
     }
-    return render(request, 'where_to_go/index.html', context={'places': places_geo})
+    return render(request, 'where_to_go/index.html',
+                  context={'places': places_geo})
