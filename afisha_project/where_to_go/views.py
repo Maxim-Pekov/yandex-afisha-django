@@ -7,7 +7,7 @@ from django.urls import reverse
 
 def show_place_id(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
-    place_json = {
+    place_details = {
         "title": place.title,
         "imgs": [image.img.url for image in
                  place.imgs.order_by('position').all()],
@@ -18,7 +18,7 @@ def show_place_id(request, place_id):
             "lat": place.lat
         }
     }
-    return JsonResponse(place_json,
+    return JsonResponse(place_details,
                         json_dumps_params={'ensure_ascii': False, 'indent': 2})
 
 
