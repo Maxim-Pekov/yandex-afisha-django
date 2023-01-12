@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.urls import reverse
 
 
-def show_place_id(request, place_id):
+def show_place_id(place_id):
     place = get_object_or_404(Place, pk=place_id)
     place_details = {
         "title": place.title,

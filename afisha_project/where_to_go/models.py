@@ -11,6 +11,7 @@ class Place(models.Model):
     lng = models.FloatField('Долгота', blank=True, null=True)
     lat = models.FloatField('Широта', blank=True, null=True)
 
+
     def __str__(self):
         return self.title
 

@@ -12,6 +12,7 @@
 добавить прям с таблицы локаций. Ссылка на 
 [админ](https://fenixxmax.pythonanywhere.com/admin/) часть.
 
+
 ![](./afisha_project/where_to_go/static/where_to_go/images/admin.png)
 
 Все данные были взяты с сайта [Kudago](https://kudago.com/msk/).
@@ -50,7 +51,7 @@ source./.venv/bin/activate  # for Linux
 pip install - r requirements.txt
 ```
 
-4. Для доступа в админ панель, создайте супер юзера
+4. Для доступа в админ панель, создайте супер юзера, из дериктории где лежит файл `manage.py`
 
 ```python
 python3 manage.py createsuperuser
@@ -62,7 +63,7 @@ python3 manage.py createsuperuser
 * Повторите пароль
 * Если пароль слишком легкий, джанга попросит вас подтвердить его создание, нажмите `y`
 
-5. Создайте файл с переменными окружения, пример содержимого ниже:
+5. Создайте файл с переменными окружения .env, находясь в `yandex-afisha-django`, пример содержимого ниже:
 
 ```python
 SECRET_KEY='Ваш секретный код'
@@ -93,6 +94,9 @@ python manage.py load_place --json_url < GITHUB_URL >
 Вместо < GITHUB_URL > подставьте RAW адрес одной из локаций, которые вы найдете здесь 
 [github.com/devmanorg/places](https://github.com/devmanorg/where-to-go-places/tree/master/places), 
 для этого перейдите по ссылке, выберете любую локацию и нажмите RAW
+
+Вот пример того как должен выглядить json file с локациями.
+![](./afisha_project/where_to_go/static/where_to_go/images/json_github.png)
 
 9. В браузере перейдите на странницу `http://127.0.0.1:8000`
 
