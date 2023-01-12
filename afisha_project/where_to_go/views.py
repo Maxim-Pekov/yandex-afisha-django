@@ -14,8 +14,8 @@ def show_place_id(request, place_id):
         "description_short": place.description_short,
         "description_long": place.description_long,
         "coordinates": {
-            "lng": place.coordinates_lng,
-            "lat": place.coordinates_lat
+            "lng": place.lng,
+            "lat": place.lat
         }
     }
     return JsonResponse(place_json,
@@ -30,7 +30,7 @@ def show_place(request):
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [place.coordinates_lng, place.coordinates_lat],
+                "coordinates": [place.lng, place.lat],
             },
             "properties": {
                 "title": place.title,
