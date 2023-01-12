@@ -19,11 +19,7 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    position = models.PositiveIntegerField(
-        default=0,
-        blank=False,
-        null=False,
-    )
+    position = models.PositiveIntegerField(default=0)
     img = models.ImageField(
         'Изображение',
         upload_to='images/%Y-%m-%d/'
