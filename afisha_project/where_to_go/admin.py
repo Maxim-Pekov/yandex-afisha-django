@@ -38,7 +38,7 @@ class SortableImageAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_filter = ('place',)
     ordering = ['position']
 
-    def get_image(self, obj):  # добавляет в админку отображение картинки
+    def get_image(self, obj):
         return mark_safe(get_image_preview_markup(obj, 150))
 
     @staticmethod
@@ -51,6 +51,5 @@ class SortableImageAdmin(SortableAdminMixin, admin.ModelAdmin):
             short_title = ' '.join(title_in_quotes.split()[:4]) + '...'
             return short_title
         return ' '.join(title.split()[:4]) + '...'
-
 
     get_image.short_description = 'изображение'
