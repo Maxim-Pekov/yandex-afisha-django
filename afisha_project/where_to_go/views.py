@@ -10,7 +10,7 @@ def show_place_id(request, place_id):
     place_details = {
         "title": place.title,
         "imgs": [image.img.url for image in
-                 place.imgs.order_by('position').all()],
+                 place.imgs.order_by('position')],
         "description_short": place.description_short,
         "description_long": place.description_long,
         "coordinates": {
