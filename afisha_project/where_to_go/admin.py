@@ -5,8 +5,8 @@ from adminsortable2.admin import SortableAdminMixin
 from adminsortable2.admin import SortableStackedInline, SortableAdminBase
 
 
-def get_image_preview_markup(obj):
-    return mark_safe(f'<img src="{obj.img.url}" height=200>')
+def get_image_preview_markup(image):
+    return mark_safe(f'<img src="{image.img.url}" height=200>')
 
 
 class ImageInline(SortableStackedInline):
