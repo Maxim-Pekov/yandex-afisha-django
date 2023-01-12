@@ -12,12 +12,6 @@ class Place(models.Model):
     def __str__(self):
         return self.title
 
-    def get_short_title(self):
-        if '«' in self.title:
-            return self.title.split('«')[1]
-        else:
-            return self.title
-
     class Meta:
         ordering = ['title']
         verbose_name = 'Метка на карте'
