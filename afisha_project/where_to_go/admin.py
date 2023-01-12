@@ -35,8 +35,8 @@ class SortableImageAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_filter = ('place',)
     ordering = ['position']
 
-    def get_place_short_title(self, obj):
-        title = obj.place.title.strip()
+    def get_place_short_title(self, image):
+        title = image.place.title.strip()
         if len(title) < 20:
             return title
         elif '«' in title:
