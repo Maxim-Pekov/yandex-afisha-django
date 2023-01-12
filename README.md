@@ -1,14 +1,17 @@
+![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=Yandex+afisha+django)
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=Yandex+afisha+django)](https://git.io/typing-svg)
-
-Это проект-сайт для отметок интересных мест на интерактивной карте с подробным описанием и фотографиями, рабочий сайт
+Это проект-сайт для отметок интересных мест на интерактивной карте с подробным 
+описанием и фотографиями, рабочий сайт
 можете посмотреть здесь [https://fenixxmax.pythonanywhere.com/](https://fenixxmax.pythonanywhere.com/).
 
 ![](./afisha_project/where_to_go/static/where_to_go/images/index.png)
 
-На сайте присутсвует удобная админ панель. Вы можете легко добавить новые локации, описание и картинки. Перетаскиванием
-картинок вы можете задать им порядок отображения. Новые картинки можно добавить прямо с таблицы локаций. 
-Ссылка на админ часть [https://fenixxmax.pythonanywhere.com/admin](https://fenixxmax.pythonanywhere.com/admin).
+На сайте присутсвует удобная админ панель. Вы можете легко добавить новые 
+локации, описание и картинки. Перетаскиванием
+картинок вы можете задать им порядок отображения. Новый картинки можно 
+добавить прям с таблицы локаций. Ссылка на 
+[админ](https://fenixxmax.pythonanywhere.com/admin/) часть.
+
 
 ![](./afisha_project/where_to_go/static/where_to_go/images/admin.png)
 
