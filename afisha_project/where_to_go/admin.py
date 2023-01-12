@@ -6,7 +6,7 @@ from adminsortable2.admin import SortableStackedInline, SortableAdminBase
 
 
 def get_image_preview_markup(obj, height):
-    return f'<img src="{Image.objects.get(id=obj.id).img.url}" ' \
+    return f'<img src="{obj.img.url}" ' \
            f'height={height}>'
 
 
