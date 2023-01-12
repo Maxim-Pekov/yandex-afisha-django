@@ -10,7 +10,7 @@ class Place(models.Model):
     coordinates_lat = models.FloatField('Широта', blank=True, null=True)
 
     def __str__(self):
-        return f'{self.title}'
+        return self.title
 
     def get_short_title(self):
         if '«' in self.title:
