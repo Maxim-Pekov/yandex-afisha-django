@@ -25,13 +25,13 @@ class Command(BaseCommand):
             img_title = os.path.basename(img_url)
             content = ContentFile(response.content, img_title)
             Image.objects.update_or_create(
-                place=place[0],
+                place=place,
                 img=content
             )
 
     def write_place_to_bd(self, place_details):
         coordinates = place_details['coordinates']
-        place = Place.objects.get_or_create(
+        place, _ = Place.objects.get_or_create(
             title=place_details.get('title'),
             defaults={
                 'description_short': place_details.get('description_short', ''),
