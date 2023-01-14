@@ -28,10 +28,13 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
 
 @admin.register(Image)
 class SortableImageAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ('position', get_image_preview_markup,
-                    'get_place_short_title',)
+    list_display = (
+        'position',
+        get_image_preview_markup,
+        'get_place_short_title',
+    )
     readonly_fields = (get_image_preview_markup,)
-    sortable_by = ('place', 'position', )
+    sortable_by = ('place', 'position',)
     list_filter = ('place',)
     ordering = ['position']
 
