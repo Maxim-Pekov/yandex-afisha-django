@@ -44,12 +44,13 @@ class SortableImageAdmin(SortableAdminMixin, admin.ModelAdmin):
 
     def get_place_short_title(self, image):
         title = image.place.title.strip()
+        word_count = 3
 
         if '«' in title:
             searched_groups = re.search('«(.*)»', title)
             part_of_title = searched_groups.group(1)
-            return Truncator(part_of_title).words(3)
-        return Truncator(title).words(3)
+            return Truncator(part_of_title).words(word_count)
+        return Truncator(title).words(word_count)
 
     get_image_preview_markup.short_description = 'изображение'
     get_place_short_title.short_description = 'короткое название'
