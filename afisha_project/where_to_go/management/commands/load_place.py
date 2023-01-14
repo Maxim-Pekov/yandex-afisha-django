@@ -1,4 +1,5 @@
-import requests, os
+import requests
+import os
 
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
@@ -34,7 +35,9 @@ class Command(BaseCommand):
         place, _ = Place.objects.get_or_create(
             title=place_details.get('title'),
             defaults={
-                'description_short': place_details.get('description_short', ''),
+                'description_short': place_details.get(
+                    'description_short', ''
+                ),
                 'description_long': place_details.get('description_long', ''),
                 'lng': coordinates.get('lng'),
                 'lat': coordinates.get('lat'),
