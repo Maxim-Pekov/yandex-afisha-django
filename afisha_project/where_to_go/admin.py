@@ -1,5 +1,9 @@
+import re
+
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from django.utils.text import Truncator
+
 from .models import Place, Image
 from adminsortable2.admin import SortableAdminMixin
 from adminsortable2.admin import SortableStackedInline, SortableAdminBase
@@ -40,13 +44,12 @@ class SortableImageAdmin(SortableAdminMixin, admin.ModelAdmin):
 
     def get_place_short_title(self, image):
         title = image.place.title.strip()
-        if len(title) < 20:
-            return title
-        elif '«' in title:
-            title_in_quotes = title.replace('»', '').split('«')[1]
-            short_title = ' '.join(title_in_quotes.split()[:4]) + '...'
-            return short_title
-        return ' '.join(title.split()[:4]) + '...'
+
+        if '«' in title:
+            searched_groups = re.search('«(.*)»', title)
+            part_of_title = searched_groups.group(1)
+            return Truncator(part_of_title).words(3)
+        return Truncator(title).words(3)
 
     get_image_preview_markup.short_description = 'изображение'
     get_place_short_title.short_description = 'короткое название'
