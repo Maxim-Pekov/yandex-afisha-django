@@ -29,7 +29,7 @@ class Command(BaseCommand):
                 img=content
             )
 
-    def write_json_to_bd(self, json):
+    def write_place_to_bd(self, json):
         coordinates = json['coordinates']
         place = Place.objects.get_or_create(
             title=json.get('title'),
@@ -46,4 +46,4 @@ class Command(BaseCommand):
         json_url = options['json_url']
         response = requests.get(json_url)
         response.raise_for_status()
-        self.write_json_to_bd(response.json())
+        self.write_place_to_bd(response.json())
