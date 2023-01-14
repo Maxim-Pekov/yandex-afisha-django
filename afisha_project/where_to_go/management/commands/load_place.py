@@ -29,18 +29,18 @@ class Command(BaseCommand):
                 img=content
             )
 
-    def write_place_to_bd(self, json):
-        coordinates = json['coordinates']
+    def write_place_to_bd(self, place_details):
+        coordinates = place_details['coordinates']
         place = Place.objects.get_or_create(
-            title=json.get('title'),
+            title=place_details.get('title'),
             defaults={
-                'description_short': json.get('description_short'),
-                'description_long': json.get('description_long'),
+                'description_short': place_details.get('description_short'),
+                'description_long': place_details.get('description_long'),
                 'lng': coordinates.get('lng'),
                 'lat': coordinates.get('lat'),
             },
         )
-        self.write_imgs_to_db(place, json.get('imgs'))
+        self.write_imgs_to_db(place, place_details.get('imgs'))
 
     def handle(self, *args, **options):
         json_url = options['json_url']
