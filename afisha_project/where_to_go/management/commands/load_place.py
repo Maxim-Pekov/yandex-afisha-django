@@ -21,6 +21,7 @@ class Command(BaseCommand):
     def write_imgs_to_db(self, place, img_urls):
         for img_url in img_urls:
             response = requests.get(img_url)
+            response.raise_for_status()
             img_title = os.path.basename(img_url)
             content = ContentFile(response.content, img_title)
             Image.objects.get_or_create(
@@ -32,14 +33,17 @@ class Command(BaseCommand):
         coordinates = json['coordinates']
         place = Place.objects.get_or_create(
             title=json.get('title'),
-            description_short=json.get('description_short'),
-            description_long=json.get('description_long'),
-            lng=coordinates.get('lng'),
-            lat=coordinates.get('lat')
+            defaults={
+                'description_short': json.get('description_short'),
+                'description_long': json.get('description_long'),
+                'lng': coordinates.get('lng'),
+                'lat': coordinates.get('lat'),
+            },
         )
         self.write_imgs_to_db(place, json.get('imgs'))
 
     def handle(self, *args, **options):
         json_url = options['json_url']
         response = requests.get(json_url)
+        response.raise_for_status()
         self.write_json_to_bd(response.json())
