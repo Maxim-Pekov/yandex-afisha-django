@@ -24,7 +24,7 @@ class Command(BaseCommand):
             response.raise_for_status()
             img_title = os.path.basename(img_url)
             content = ContentFile(response.content, img_title)
-            Image.objects.get_or_create(
+            Image.objects.update_or_create(
                 place=place[0],
                 img=content
             )
@@ -34,13 +34,13 @@ class Command(BaseCommand):
         place = Place.objects.get_or_create(
             title=place_details.get('title'),
             defaults={
-                'description_short': place_details.get('description_short'),
-                'description_long': place_details.get('description_long'),
+                'description_short': place_details.get('description_short', ''),
+                'description_long': place_details.get('description_long', ''),
                 'lng': coordinates.get('lng'),
                 'lat': coordinates.get('lat'),
             },
         )
-        self.write_imgs_to_db(place, place_details.get('imgs'))
+        self.write_imgs_to_db(place, place_details.get('imgs', []))
 
     def handle(self, *args, **options):
         json_url = options['json_url']
