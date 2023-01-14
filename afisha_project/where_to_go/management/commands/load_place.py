@@ -34,8 +34,8 @@ class Command(BaseCommand):
             title=json.get('title'),
             description_short=json.get('description_short'),
             description_long=json.get('description_long'),
-            coordinates_lng=coordinates.get('lng'),
-            coordinates_lat=coordinates.get('lat')
+            lng=coordinates.get('lng'),
+            lat=coordinates.get('lat')
         )
         self.write_imgs_to_db(place, json.get('imgs'))
 
