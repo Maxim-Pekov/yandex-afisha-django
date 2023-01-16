@@ -25,10 +25,10 @@ class Command(BaseCommand):
         )
 
     def write_imgs_to_db(self, place, img_urls):
-        for img_url in img_urls:
+        for count, img_url in enumerate(img_urls):
             response = requests.get(img_url)
             response.raise_for_status()
-            img_title = os.path.basename(img_url)
+            img_title = f'image {count}'
             content = ContentFile(response.content, img_title)
             Image.objects.update_or_create(
                 place=place,
