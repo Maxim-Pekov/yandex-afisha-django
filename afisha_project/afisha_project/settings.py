@@ -7,6 +7,31 @@ env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'consoleFormater': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{'
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'WARNING',
+            'class': 'logging.StreamHandler',
+            'formatter': 'consoleFormater'
+        },
+    },
+    'loggers': {
+        'where_to_go': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+            'propagate': True,
+        }
+    }
+}
+
 SECRET_KEY = env.str('SECRET_KEY')
 
 DEBUG = env.bool('DEBUG')

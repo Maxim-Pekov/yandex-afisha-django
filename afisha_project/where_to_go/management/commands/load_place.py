@@ -1,9 +1,14 @@
 import requests
 import os
+import logging
 
 from django.core.management.base import BaseCommand
+from django.db.utils import IntegrityError
 from django.core.files.base import ContentFile
 from where_to_go.models import Place, Image
+
+
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -49,4 +54,7 @@ class Command(BaseCommand):
         json_url = options['json_url']
         response = requests.get(json_url)
         response.raise_for_status()
-        self.write_place_to_bd(response.json())
+        try:
+            self.write_place_to_bd(response.json())
+        except IntegrityError:
+            logger.warning("Введите обязательные поля, title, lng, lat")
