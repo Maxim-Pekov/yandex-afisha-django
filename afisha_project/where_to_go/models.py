@@ -37,6 +37,9 @@ class Image(models.Model):
         on_delete=models.CASCADE
     )
 
+    def __str__(self):
+        return f'image position - {self.position}, place - {self.place}'
+
     class Meta:
         ordering = ['position']
         verbose_name = 'Картинка'
