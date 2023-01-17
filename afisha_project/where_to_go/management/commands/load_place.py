@@ -1,5 +1,4 @@
 import requests
-import os
 import logging
 
 from django.core.management.base import BaseCommand
@@ -32,7 +31,8 @@ class Command(BaseCommand):
             content = ContentFile(response.content, img_title)
             Image.objects.update_or_create(
                 place=place,
-                img=content
+                img=content,
+                position=count
             )
 
     def write_place_to_bd(self, place_details):
