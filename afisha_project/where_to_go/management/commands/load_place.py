@@ -37,18 +37,18 @@ class Command(BaseCommand):
 
     def write_place_to_bd(self, place_details):
         coordinates = place_details['coordinates']
-        place, is_place = Place.objects.get_or_create(
-            title=place_details.get('title'),
+        place, place_not_created = Place.objects.get_or_create(
+            title=place_details['title'],
             defaults={
                 'description_short': place_details.get(
                     'description_short', ''
                 ),
                 'description_long': place_details.get('description_long', ''),
-                'lng': coordinates.get('lng'),
-                'lat': coordinates.get('lat'),
+                'lng': coordinates['lng'],
+                'lat': coordinates['lat'],
             },
         )
-        if is_place:
+        if place_not_created:
             self.write_imgs_to_db(place, place_details.get('imgs', []))
 
     def handle(self, *args, **options):
@@ -57,5 +57,5 @@ class Command(BaseCommand):
         response.raise_for_status()
         try:
             self.write_place_to_bd(response.json())
-        except IntegrityError:
+        except KeyError:
             logger.warning("Введите обязательные поля, title, lng, lat")
