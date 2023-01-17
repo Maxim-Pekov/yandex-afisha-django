@@ -37,7 +37,7 @@ class Command(BaseCommand):
 
     def write_place_to_bd(self, place_details):
         coordinates = place_details['coordinates']
-        place, place_not_created = Place.objects.get_or_create(
+        place, place_created = Place.objects.get_or_create(
             title=place_details['title'],
             defaults={
                 'description_short': place_details.get(
@@ -48,7 +48,7 @@ class Command(BaseCommand):
                 'lat': coordinates['lat'],
             },
         )
-        if place_not_created:
+        if place_created:
             self.write_imgs_to_db(place, place_details.get('imgs', []))
 
     def handle(self, *args, **options):
